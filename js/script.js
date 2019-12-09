@@ -19,7 +19,7 @@ FSJS project 2 - List Filter and Pagination
 const studentList = document.querySelectorAll('.student-item')
 const itemsPerPage = 10;
 
-function showPage (list, page) {
+const showPage = (list, page) => {
    let startIndex = (page * itemsPerPage) - itemsPerPage;
    let endIndex = page * itemsPerPage;
    for (let i = 0; i < list.length; i++) {
@@ -31,8 +31,36 @@ function showPage (list, page) {
    }      
 }
 
-showPage(studentList, 1);
+const paginationLinks = list => {
+   const createElement = elementType => {
+      const element = document.createElement(elementType);
+      return element;
+   }
+   const numberOfPages = Math.ceil((list.length / itemsPerPage));
+   const anchorDiv = document.querySelector('.page');
+   const div = createElement('div');
+      div.className = "pagination";
+   const ul = createElement('ul');
+   anchorDiv.appendChild(div);
+   div.appendChild(ul);
 
+   for (let i = 0; i < numberOfPages; i++) {
+      const li = createElement('li');
+      const a = createElement('a');
+      a.href = '#';
+      const pageNum = i + 1;
+      a.textContent = pageNum;
+      ul.appendChild(li);
+      li.appendChild(a);
+   }
+
+   
+
+  
+}
+
+showPage(studentList, 1);
+paginationLinks(studentList);
 
 /*** 
    Create the `showPage` function to hide all of the items in the 
