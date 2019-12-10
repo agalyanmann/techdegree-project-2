@@ -47,20 +47,23 @@ const paginationLinks = list => {
    for (let i = 0; i < numberOfPages; i++) {
       const li = createElement('li');
       const a = createElement('a');
+      if (i === 0) {
+         a.className = 'active';
+      } 
       a.href = '#';
       const pageNum = i + 1;
       a.textContent = pageNum;
       ul.appendChild(li);
       li.appendChild(a);
+      a.addEventListener('click', (e) => {
+         const pageLinks = document.querySelectorAll('a');
+         for(let i = 0; i < pageLinks.length; i++) {
+            pageLinks[i].classList.remove('active');
+         }
+         e.target.className = 'active';
+      })
    }
-
-   
-
-  
 }
-
-showPage(studentList, 1);
-paginationLinks(studentList);
 
 /*** 
    Create the `showPage` function to hide all of the items in the 
