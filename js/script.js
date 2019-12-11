@@ -2,10 +2,11 @@
 Treehouse Techdegree:
 FSJS project 2 - List Filter and Pagination
 ******************************************/
-   
+ //global variables to set framework for needed functions  
 const studentList = document.querySelectorAll('.student-item')
-const itemsPerPage = 10;
+const itemsPerPage = 10; //allows the developer to determine number of LI they want listed per page
 
+//This function will limit the amount of LIs on a page based on global variable as well as recieve information to determine which page or set of LIs to display using index numbers. 
 const showPage = (list, page) => {
    let startIndex = (page * itemsPerPage) - itemsPerPage;
    let endIndex = page * itemsPerPage;
@@ -18,11 +19,15 @@ const showPage = (list, page) => {
    }      
 }
 
+//This function will create dynamicly DOM elements to alter the look of the page based on the amount of students that are stored in the 'student-item' class. 
 const paginationLinks = list => {
+   //This function works internally to creat DOM elements more quickly while maintaining DRY and modular coding. 
    const createElement = elementType => {
       const element = document.createElement(elementType);
       return element;
    }
+
+   //This section of code sets the number of pages needed and navigates and appends to a specific area in the DOM. (noted in the index.html file)
    const numberOfPages = Math.ceil((list.length / itemsPerPage));
    const anchorDiv = document.querySelector('.page');
    const div = createElement('div');
@@ -31,6 +36,8 @@ const paginationLinks = list => {
    anchorDiv.appendChild(div);
    div.appendChild(ul);
 
+   //This section of code loops over the set array of pages to dynamicly create the pagination links based on the number of students in the list. It also sets a listener to
+   //modify the active range of index numbers being displayed as well as recall the showPage function with the updated arguments.
    for (let i = 0; i < numberOfPages; i++) {
       const li = createElement('li');
       const a = createElement('a');
@@ -54,5 +61,6 @@ const paginationLinks = list => {
    }
 }
 
+//calls the original funtions to create a starting point for the end user to navigate. 
 showPage(studentList, 1);
 paginationLinks(studentList);
