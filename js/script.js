@@ -10,8 +10,8 @@ const showPage = (list, page) => {
    let startIndex = (page * itemsPerPage) - itemsPerPage;
    let endIndex = page * itemsPerPage;
    for (let i = 0; i < list.length; i++) {
-      if ([i] >= startIndex && [i] < endIndex) {
-         list[i].style.display = " ";
+      if (i >= startIndex && i < endIndex) {
+         list[i].style.display = "";
       } else {
          list[i].style.display = "none";
       }
@@ -49,7 +49,7 @@ const paginationLinks = list => {
             pageLinks[i].classList.remove('active');
          }
          e.target.className = 'active';
-         showPage(studentList, pageToShow);
+         showPage(list, pageToShow);
       });
    }
 }
