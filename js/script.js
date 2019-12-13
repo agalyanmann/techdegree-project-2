@@ -25,15 +25,11 @@ searchAnchor.appendChild(searchDiv);
 searchDiv.appendChild(input);
 searchDiv.appendChild(button);
 
-const searchPage = (searchInput, names) => {
-   for (let i = 0; i < names.length; i++) {
-      names[i].classList.remove('match');
-      if (search.value.length !== 0 && names[i].textContent.toLowerCase() == searchInput.value.toLowerCase()) {
-         names[i].className = 'match';
-      }
-   }
-}
 
+searchDiv.addEventListener('submit', (event) => {
+   event.preventDefault();
+   console.log(input.value);
+});
 
 //This function will limit the amount of LIs on a page based on global variable as well as recieve information to determine which page or set of LIs to display using index numbers. 
 const showPage = (list, page) => {
