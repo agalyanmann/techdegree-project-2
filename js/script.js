@@ -7,12 +7,20 @@ const studentList = document.querySelectorAll('.student-item')
 const itemsPerPage = 10; //allows the developer to determine number of LI they want listed per page
 const searchAnchor = document.querySelector('h2').parentNode;
 
+
 //This function works to creat DOM elements more quickly while maintaining DRY and modular coding. 
 const createElement = elementType => {
    const element = document.createElement(elementType);
    return element;
 }
 
+
+
+//IN PROGRESS SEARCH BAR CODE
+   // Current Bugs:
+   //    1:pagination is adding more divs to the page instead of replacing and dyanmically updating pagination paginationLinks
+
+const studentName = document.querySelectorAll('h3');
 const searchDiv = createElement('div');
    searchDiv.className = 'student-search';
 const input = createElement('input');
@@ -26,10 +34,34 @@ searchDiv.appendChild(input);
 searchDiv.appendChild(button);
 
 
-searchDiv.addEventListener('submit', (event) => {
-   event.preventDefault();
-   console.log(input.value);
+const searchField = (userInput, searchList) => {
+   let searchResults = [];
+   for (let i = 0; i < searchList.length; i++){
+      studentList[i].style.display = 'none';
+      let filteredName = studentList[i].textContent;
+      if(filteredName.toLowerCase().includes(userInput.value.toLowerCase())) {
+         studentList[i].style.display = '';
+         searchResults.push(studentList[i]);
+      }
+   } 
+   showPage(searchResults, 1);
+   paginationLinks(searchResults);
+}
+
+
+searchDiv.addEventListener('keyup', (e) =>{
+   searchField(input, studentName);
 });
+button.addEventListener('click', (e) => {
+   searchField(input, studentName);
+});
+
+//IN PROGRESS SEARCH BAR CODE
+
+
+
+
+
 
 //This function will limit the amount of LIs on a page based on global variable as well as recieve information to determine which page or set of LIs to display using index numbers. 
 const showPage = (list, page) => {
